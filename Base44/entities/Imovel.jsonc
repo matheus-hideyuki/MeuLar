@@ -1,0 +1,87 @@
+{
+  "name": "Imovel",
+  "type": "object",
+  "properties": {
+    "titulo": {
+      "type": "string"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "Comprar",
+        "Alugar"
+      ]
+    },
+    "preco": {
+      "type": "number"
+    },
+    "bairro": {
+      "type": "string"
+    },
+    "cidade": {
+      "type": "string"
+    },
+    "quartos": {
+      "type": "number"
+    },
+    "banheiros": {
+      "type": "number"
+    },
+    "vagas": {
+      "type": "number"
+    },
+    "pet": {
+      "type": "boolean",
+      "default": false
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "fotos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "whatsapp": {
+      "type": "string"
+    },
+    "anunciante_nome": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "titulo",
+    "tipo",
+    "preco",
+    "cidade",
+    "whatsapp"
+  ],
+  "rls": {
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
